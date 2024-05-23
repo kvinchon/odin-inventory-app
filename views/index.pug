@@ -1,0 +1,13 @@
+extends layout
+
+block content
+  h1= title
+  p Welcome to my awesome grocery store!
+
+  h2 Dynamic content 
+
+  p The grocery store has the following record counts: 
+
+  ul 
+    li #[strong Categories:] !{category_count}
+    li #[strong Items:] !{item_count}

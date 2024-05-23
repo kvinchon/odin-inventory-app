@@ -1,0 +1,36 @@
+extends layout 
+
+block content 
+  h1= title
+
+  form(method='POST')
+    div.form-group
+      label(for='name') Name:
+      input#name.form-control(type='text' placeholder='Name (mushrooms)' name='name' maxLength='100' required value=(item === undefined ? '' : item.name))
+    div.form-group
+      label(for='description') Description:
+      input#description.form-control(type='text' placeholder='Description (variety)' name='description' maxLength='100' required value=(item === undefined ? '' : item.description))
+    div.form-group
+      label(for='category') Category: 
+      select#category.form-control(name='category' required)
+        option(value='') --Please select a category--
+        each category in categories 
+          if item
+            if item.category._id.toString() === category._id.toString()
+              option(value=category._id selected) #{category.name}
+            else
+              option(value=category._id) #{category.name}
+          else
+            option(value=category._id) #{category.name}
+    div.form-group
+      label(for='price') Price: 
+      input#price.form-control(type='number' placeholder='Price (2.50)' name='price' step='0.01' min='0' max='1000' required value=(item === undefined ? '' : item.price))
+    div.form-group
+      label(for='stock') Number in stock: 
+      input#stock.form-control(type='number' placeholder='Number in stock (10)' name='stock' min='0' max='1000' required value=(item === undefined ? '' : item.stock))
+    button.btn.btn-primary(type='submit') Submit
+  
+  if errors
+    ul
+      each error in errors
+        li= error.msg
